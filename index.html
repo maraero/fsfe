@@ -3,8 +3,12 @@
     <body>Body</body>
     <script>
         let ws;
-        const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        ws = new WebSocket(`${proto}://${window.location.host}`);
+        try {
+            const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            ws = new WebSocket(`${proto}://${window.location.host}`);
+        } catch(e) {
+            console.error(e)
+        }
         ws.onmessage = (event) => {
             console.log(event.data)
         }
